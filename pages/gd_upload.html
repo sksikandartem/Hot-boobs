@@ -1,0 +1,31 @@
+<div class="section-title">GD Upload (Google Drive / Remote Host)</div>
+
+<div class="card" style="display: block;">
+    <p style="margin-bottom: 20px; color: var(--text-secondary);">
+        Select a local file to upload directly to your configured Google Drive or a future integrated host.
+    </p>
+    <form id="gdUploadForm">
+        <div class="form-group">
+            <label for="localFileInput">Select File:</label>
+            <input type="file" id="localFileInput" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="targetHost">Target Host (Future Expansion):</label>
+            <select id="targetHost" class="form-control">
+                <option value="gd">Google Drive</option>
+                <option value="dropbox" disabled>Dropbox (Coming Soon)</option>
+                <option value="onedrive" disabled>OneDrive (Coming Soon)</option>
+            </select>
+        </div>
+        
+        <button type="submit" class="btn-submit">
+            <i class="fas fa-upload"></i> Start GD Upload
+        </button>
+
+        <div class="progress-bar-container" id="progressBarContainer">
+            <div class="progress-bar-fill" id="progressBarFill">0%</div>
+        </div>
+        
+        <div class="message" id="gdUploadMessage"></div>
+    </form>
+</div>

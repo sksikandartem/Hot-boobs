@@ -1,0 +1,27 @@
+<div class="section-title">File Manager</div>
+
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>File Name</th>
+                <th>Size</th>
+                <th>Host</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="fileTableBody">
+            <!-- Content is rendered by script.js's renderFileManagerTable() -->
+            <tr><td colspan="5" style="text-align:center;">Loading files...</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // This script block is executed when the content is loaded by index.html/script.js
+    // It calls the main script function to populate the table with the shared state data.
+    if (typeof renderFileManagerTable === 'function') {
+        renderFileManagerTable();
+    }
+</script>
