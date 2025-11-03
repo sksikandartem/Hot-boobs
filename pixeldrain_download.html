@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelDrain - Secure Download</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Using the user's provided CSS for the download page */
+        /* [ ... User's CSS is included here for brevity ... ] */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #222;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            font-size: 2em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #9c27b0, #e040fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .logo p {
+            font-size: 0.85em;
+            color: #999;
+            font-weight: 300;
+        }
+
+        .file-title {
+            background: linear-gradient(135deg, #2a2a2a, #333);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .file-title h2 {
+            font-size: 1.1em;
+            font-weight: 600;
+            line-height: 1.6;
+            color: #fff;
+            word-wrap: break-word;
+            text-align: center;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #2a2a2a, #333);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .info-item:first-child {
+            padding-top: 0;
+        }
+
+        .info-label {
+            font-weight: 500;
+            color: #aaa;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-label i {
+            width: 18px;
+            text-align: center;
+            color: #e040fb;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.95em;
+        }
+
+        .download-section {
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px 50px;
+            background: linear-gradient(135deg, #9c27b0, #e040fb);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(156, 39, 176, 0.5);
+            text-decoration: none;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(156, 39, 176, 0.7);
+        }
+
+        .download-btn i {
+            font-size: 1.4em;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #666;
+            font-size: 0.85em;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: #e040fb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .logo h1 { font-size: 1.7em; }
+            .file-title h2 { font-size: 1em; }
+            .info-box { padding: 20px; }
+            .info-item {
+                flex-direction: column;
+                gap: 6px;
+                padding: 10px 0;
+                align-items: flex-start;
+            }
+            .download-btn {
+                padding: 18px 40px;
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+            <h1><i class="fas fa-cloud-download-alt"></i> PixelDrain</h1>
+            <p>Fast & Secure File Hosting</p>
+        </div>
+
+        <!-- File Title (Placeholder) -->
+        <div class="file-title">
+            <h2>[HindiKDramaWatch.in] MultiHost File (ID: XYL12345).mov</h2>
+        </div>
+
+        <!-- File Info (Placeholder) -->
+        <div class="info-box">
+            <div class="info-item">
+                <span class="info-label"><i class="fas fa-hdd"></i> Size</span>
+                <span class="info-value">37.37 MB</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label"><i class="fas fa-file-video"></i> Format</span>
+                <span class="info-value">mov</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label"><i class="fas fa-code"></i> MimeType</span>
+                <span class="info-value">video/x-matroska</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label"><i class="fas fa-calendar-plus"></i> Added on</span>
+                <span class="info-value" id="currentDate">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Download Section -->
+        <div class="download-section">
+            <h3 class="section-title"><i class="fas fa-download"></i> Ready to Download</h3>
+            
+            <button class="download-btn" id="downloadBtn">
+                <i class="fas fa-arrow-circle-down"></i>
+                <span>Download Now</span>
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Powered by <a href="#">MultiHost Panel</a></p>
+            <p style="margin-top: 8px;">Secure & Lightning Fast Downloads</p>
+        </div>
+    </div>
+
+    <script>
+        // Configuration: Use a placeholder direct link and ad link
+        const PIXELDRAIN_FILE_ID = 'example_file_id'; // Placeholder for the actual file ID
+        // The user requested to change the download URL to the PixelDrain direct API format
+        const REAL_DOWNLOAD_LINK = `https://pixeldrain.dev/api/file/${PIXELDRAIN_FILE_ID}`;
+        
+        // Placeholder Ad Link
+        const AD_LINK = 'https://www.effectivegatecpm.com/e9aa22ew?key=cbfeed334714a49d3eacd13a86de1b5c';
+        
+        // Auto-fill current date
+        function setCurrentDate() {
+            const dateElement = document.getElementById('currentDate');
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            const formattedDate = now.toLocaleDateString('en-US', options);
+            dateElement.textContent = formattedDate;
+        }
+
+        // Ad-Click Logic
+        let clickCount = 0;
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            clickCount++;
+            
+            if (clickCount === 1) {
+                // First click - open ad
+                window.open(AD_LINK, '_blank');
+                this.innerHTML = '<i class="fas fa-arrow-circle-down"></i><span>Click Again to Download</span>';
+                this.style.backgroundColor = '#f97316'; // Change color to indicate state
+                this.style.boxShadow = '0 10px 30px rgba(249, 115, 22, 0.5)';
+            } else {
+                // Second click - redirect to real download
+                window.location.href = REAL_DOWNLOAD_LINK;
+            }
+        });
+
+        setCurrentDate();
+    </script>
+
+    <!-- Ad Script (As requested to be on the Pixel Page) -->
+    <script type='text/javascript' src='//pl26636219.effectivegatecpm.com/3e/45/40/3e4540cf281cc906b97201fc96e4ccdb.js'></script>
+</body>
+</html>
