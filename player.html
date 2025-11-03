@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <title>Abyss Viewer | MultiHost Player</title>
+    <style>
+        /* Player CSS (from user's request) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .video-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .video-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            background: #000;
+        }
+        
+        /* Watermark (from user's request) */
+        .watermark {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 11px;
+            font-weight: 500;
+            z-index: 100;
+            pointer-events: none;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* iOS Safe Area */
+        @supports (padding: max(0px)) {
+            .video-container {
+                padding-left: max(0px, env(safe-area-inset-left));
+                padding-right: max(0px, env(safe-area-inset-right));
+                padding-top: max(0px, env(safe-area-inset-top));
+                padding-bottom: max(0px, env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <!-- The iframe source will be set by JavaScript -->
+        <iframe 
+            id="videoFrame" 
+            class="video-frame" 
+            src="about:blank" 
+            allowfullscreen 
+            allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope"
+            loading="eager"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+    
+    <div class="watermark">MultiHost Player - Powered by MultiHost Panel</div>
+
+    <!-- JavaScript to set iframe source -->
+    <script>
+        function initializePlayer() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoUrl = urlParams.get('video') || urlParams.get('url');
+            const videoFrame = document.getElementById('videoFrame');
+
+            if (videoUrl) {
+                // Decode the URL
+                let finalUrl = decodeURIComponent(videoUrl);
+                
+                // IMPORTANT: Handle the specific RPMShare URL format if it contains a hash
+                // The URL is already encoded/passed correctly by script.js, we just need to use it.
+                // The iframe will load the URL as-is, even with the hash.
+                // Example: 'https://playlinkhub.rpmvid.com/#a1b2c3d4e5f6g7h8'
+                
+                videoFrame.src = finalUrl;
+            } else {
+                // Fallback or error handling
+                console.error("No video URL provided.");
+                // Optionally display an error message in the iframe area
+                videoFrame.src = 'data:text/html;charset=utf-8,<h1>Error: No Video URL Provided.</h1><p>Check the link from the File Manager.</p>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initializePlayer);
+    </script>
+
+    <!-- Ad Script (As requested to be on the Player Page) -->
+    <script type='text/javascript' src='//pl26636219.effectivegatecpm.com/3e/45/40/3e4540cf281cc906b97201fc96e4ccdb.js'></script>
+</body>
+</html>
